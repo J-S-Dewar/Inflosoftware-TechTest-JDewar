@@ -246,3 +246,6 @@ ModelManifest.xml
 
 # Inflo Custom Ignores
 **/*.js.map
+
+# macOS system files
+.DS_Store

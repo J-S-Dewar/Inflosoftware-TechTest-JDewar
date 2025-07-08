@@ -11,9 +11,25 @@ public class UsersController : Controller
     public UsersController(IUserService userService) => _userService = userService;
 
     [HttpGet]
-    public ViewResult List()
+
+    //Add new query string param with default
+    public ViewResult List(string status = "all")
     {
-        var items = _userService.GetAll().Select(p => new UserListItemViewModel
+        //Get all users
+        var users = _userService.GetAll();
+
+        //Filter users based on value of 'status'
+        if (status == "active")
+        {
+            users = users.Where(u => u.IsActive);
+        }
+        else if (status == "inactive")
+        {
+            users = users.Where(u => !u.IsActive);
+        }
+
+
+        var items = users.Select(p => new UserListItemViewModel
         {
             Id = p.Id,
             Forename = p.Forename,
