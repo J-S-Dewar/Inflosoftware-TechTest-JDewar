@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using UserManagement.Models;
 using UserManagement.Services.Domain.Interfaces;
 using UserManagement.Web.Models.Users;
 
@@ -16,16 +17,20 @@ public class UsersController : Controller
     public ViewResult List(string status = "all")
     {
         //Get all users
-        var users = _userService.GetAll();
+        IEnumerable<User> users;
 
         //Filter users based on value of 'status'
         if (status == "active")
         {
-            users = users.Where(u => u.IsActive);
+            users = _userService.FilterByActive(true);
         }
         else if (status == "inactive")
         {
-            users = users.Where(u => !u.IsActive);
+            users = users = _userService.FilterByActive(false);
+        }
+        else
+        {
+            users = _userService.GetAll();
         }
 
 
@@ -35,7 +40,8 @@ public class UsersController : Controller
             Forename = p.Forename,
             Surname = p.Surname,
             Email = p.Email,
-            IsActive = p.IsActive
+            IsActive = p.IsActive,
+            DateOfBirth = p.DateOfBirth
         });
 
         var model = new UserListViewModel
