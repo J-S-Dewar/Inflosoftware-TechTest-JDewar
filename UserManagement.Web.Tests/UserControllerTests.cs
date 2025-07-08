@@ -23,6 +23,37 @@ public class UserControllerTests
             .Which.Items.Should().BeEquivalentTo(users);
     }
 
+    //Additional tests to return only active or only inactive users
+    [Fact]
+    public void List_WithActiveStatus_ReturnsOnlyActiveUsers()
+    {
+        // Arrange
+        var controller = CreateController();
+        SetupUsers(isActive: true);
+
+        // Act
+        var result = controller.List("active");
+
+        // Assert
+        var model = result.Model as UserListViewModel;
+        model!.Items.Should().OnlyContain(u => u.IsActive);
+    }
+
+    [Fact]
+    public void List_WithInactiveStatus_ReturnsOnlyInactiveUsers()
+    {
+        // Arrange
+        var controller = CreateController();
+        SetupUsers(isActive: false);
+
+        // Act
+        var result = controller.List("inactive");
+
+        // Assert
+        var model = result.Model as UserListViewModel;
+        model!.Items.Should().OnlyContain(u => !u.IsActive);
+    }
+
     private User[] SetupUsers(string forename = "Johnny", string surname = "User", string email = "juser@example.com", bool isActive = true)
     {
         var users = new[]
