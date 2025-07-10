@@ -63,3 +63,20 @@ Add additional layers to the application that will ensure that it is scaleable w
 
 * Please feel free to change or refactor any code that has been supplied within the solution and think about clean maintainable code and architecture when extending the project.
 * If any additional packages, tools or setup are required to run your completed version, please document these thoroughly.
+
+
+## Submission Notes
+
+Thank you for the opportunity to complete this User Management exercise.
+
+I have implemented all the **standard tasks** as requested, including:
+
+- Filtering users by active or inactive status  
+- Adding a new `DateOfBirth` property and displaying it where needed  
+- Full Create, Read, Update, and Delete (CRUD) functionality with validation and user feedback  
+- An initial attempt at writing unit tests, with two key controller methods covered; I plan to improve my testing skills further 
+- Proper use of Git for version control, including commits that reflect logical changes  
+
+I did not attempt the more advanced, expert, or platform-level tasks as they are beyond my current experience, but I am eager to learn and grow in these areas.
+
+If you have any questions about my implementation, I’m happy to discuss or provide further details.

@@ -25,33 +25,34 @@ public class UserControllerTests
             .Which.Items.Should().BeEquivalentTo(users);
     }
 
-    //Tests return only active or only inactive users
+    // Test that the List action returns only users marked as active when filtering by "active" status
     [Fact]
     public void List_WithActiveStatus_ReturnsOnlyActiveUsers()
     {
-        // Arrange
+        // Arrange: create the controller and set up test users who are active
         var controller = CreateController();
         SetupUsers(isActive: true);
 
-        // Act
+        // Act: call the List action with the "active" status filter
         var result = controller.List("active");
 
-        // Assert
+        // Assert: check that the returned model contains only users where IsActive is true
         var model = result.Model as UserListViewModel;
         model!.Items.Should().OnlyContain(u => u.IsActive);
     }
 
+    // Test that the List action returns only users marked as inactive when filtering by "inactive" status
     [Fact]
     public void List_WithInactiveStatus_ReturnsOnlyInactiveUsers()
     {
-        // Arrange
+        // Arrange: create the controller and set up test users who are inactive
         var controller = CreateController();
         SetupUsers(isActive: false);
 
-        // Act
+        // Act: call the List action with the "inactive" status filter
         var result = controller.List("inactive");
 
-        // Assert
+        // Assert: check that the returned model contains only users where IsActive is false
         var model = result.Model as UserListViewModel;
         model!.Items.Should().OnlyContain(u => !u.IsActive);
     }
