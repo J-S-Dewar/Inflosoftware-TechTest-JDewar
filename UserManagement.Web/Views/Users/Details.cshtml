@@ -1,0 +1,71 @@
+@model UserManagement.Web.Models.Users.UserListItemViewModel
+@{
+    ViewData["Title"] = "View";
+}
+
+<style>
+    .table-responsive {
+        overflow: visible !important;
+    }
+</style>
+
+<h2>User Information</h2>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Forename</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Account Active</th>
+                <th>Date of Birth</th>
+                <th style="width: 1px;"></th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>
+                        @Model.Id
+                    </td>
+                    <td>
+                        @Model.Forename
+                    </td>
+                    <td>
+                        @Model.Surname
+                    </td>
+                    <td>
+                        @Model.Email
+                    </td>
+                    <td>
+                        @(Model.IsActive ? "Yes" : "No")
+                    </td>
+                    <td>
+                        @(Model.DateOfBirth.HasValue ? @Model.DateOfBirth.Value.ToString("dd/MM/yyyy") : "N/A")
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="btnToggleActions">
+                                Actions
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="btnToggleActions">
+                                <li><a class="dropdown-item" asp-controller="Users" asp-action="Edit" asp-route-id="@Model.Id">Edit</a></li>
+                                <li><a class="dropdown-item" asp-controller="Users" asp-action="Delete" asp-route-id="@Model.Id">Delete</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="mb-5"></div>
+
+<div>
+    <div class="btn-group" role="group"></div>
+
+    <a class="btn btn-primary float-end" asp-controller="Users" asp-action="List">
+        Return to User List
+    </a>
+</div>

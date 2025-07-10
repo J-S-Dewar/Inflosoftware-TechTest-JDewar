@@ -5,6 +5,8 @@ using UserManagement.Models;
 
 namespace UserManagement.Data;
 
+// Added seed in OnModelCreating to test DateOfBirth - one user with value of null and one with a valid DateTime for testing
+
 public class DataContext : DbContext, IDataContext
 {
     public DataContext() => Database.EnsureCreated();

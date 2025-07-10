@@ -1,0 +1,56 @@
+@model UserManagement.Web.Models.Users.UserListItemViewModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete User</h2>>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Forename</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Account Active</th>
+                <th>Date of Birth</th>
+                <th style="width: 1px;"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                    <td>
+                        @Model.Id
+                    </td>
+                    <td>
+                        @Model.Forename
+                    </td>
+                    <td>
+                        @Model.Surname
+                    </td>
+                    <td>
+                        @Model.Email
+                    </td>
+                    <td>
+                        @(Model.IsActive ? "Yes" : "No")
+                    </td>
+                    <td>
+                        @(Model.DateOfBirth.HasValue ? @Model.DateOfBirth.Value.ToString("dd/MM/yyyy") : "N/A")
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="d-flex justify-content-between">
+    <form method="post" asp-controller="Users" asp-action="Delete" asp-route-id="@Model.Id" onsubmit="return confirm('Are you sure you want to delete this user?');">
+        <button type="submit" class="dropdown-item btn btn-link text-danger">Delete User</button>
+    </form>
+
+    
+    <a class="btn btn-primary" asp-controller="Users" asp-action="List">
+        Return to User List
+    </a>
+</div>

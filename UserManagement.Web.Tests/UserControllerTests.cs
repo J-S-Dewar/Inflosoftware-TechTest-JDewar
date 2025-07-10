@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Mvc;
 using UserManagement.Models;
 using UserManagement.Services.Domain.Interfaces;
 using UserManagement.Web.Models.Users;
@@ -24,7 +25,7 @@ public class UserControllerTests
             .Which.Items.Should().BeEquivalentTo(users);
     }
 
-    //Additional tests to return only active or only inactive users
+    //Tests return only active or only inactive users
     [Fact]
     public void List_WithActiveStatus_ReturnsOnlyActiveUsers()
     {
@@ -54,6 +55,7 @@ public class UserControllerTests
         var model = result.Model as UserListViewModel;
         model!.Items.Should().OnlyContain(u => !u.IsActive);
     }
+
 
     private User[] SetupUsers(string forename = "Johnny", string surname = "User", string email = "juser@example.com", bool isActive = true, DateTime? dateOfBirth = null)
     {
